@@ -26,10 +26,11 @@ class DeleteModel(BaseModel):
     doc_id: str
 
 class FirestoreInterface:
-    def __init__(self):
-        self.project_id = os.getenv('GOOGLE_CLOUD_PROJECT_ID')
+    def __init__(self, project_id=None, credentials_path=None):
+        self.project_id = project_id if project_id else os.getenv('GOOGLE_CLOUD_PROJECT_ID')
+        credentials_path = credentials_path if credentials_path else os.getenv('GOOGLE_SERVICE_ACCOUNT_CREDENTIALS')
         self.client = firestore.Client(
-            credentials=service_account.Credentials.from_service_account_file(os.getenv('GOOGLE_SERVICE_ACCOUNT_CREDENTIALS')),
+            credentials=service_account.Credentials.from_service_account_file(credentials_path),
             project=self.project_id
         )
         # Include the models so they can be accessed easier outside the class

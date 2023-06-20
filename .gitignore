@@ -1,0 +1,14 @@
+.env
+.venv
+**/gcp-service-account-credentials.json
+
+# Python
+*.py[cod]
+*.pyo
+*.pyd
+__pycache__
+*.egg-info/
+dist/
+build/
+*.egg
+*.pyc
