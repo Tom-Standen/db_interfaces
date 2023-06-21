@@ -11,6 +11,12 @@ load_dotenv()
 class SelectModel(BaseModel):
     collection_id: str
     filters: Optional[Dict[str, Any]]
+    order_by: Optional[List[OrderByModel]]
+    limit: Optional[int]
+
+class OrderByModel(BaseModel):
+    field: str
+    ascending: Optional[bool] = False
 
 class InsertModel(BaseModel):
     collection_id: str
@@ -45,6 +51,12 @@ class FirestoreInterface:
             if model.filters:
                 for field, value in model.filters.items():
                     collection = collection.where(field, '==', value)
+            if model.order_by:
+                for order in model.order_by:
+                    direction = firestore.Query.ASCENDING if order.ascending else firestore.Query.DESCENDING
+                    collection = collection.order_by(order.field, direction=direction)
+            if model.limit:
+                collection = collection.limit(model.limit)
             docs = collection.stream()
             return [doc.to_dict() for doc in docs]
         except Exception as e:
