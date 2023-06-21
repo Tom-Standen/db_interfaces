@@ -9,8 +9,8 @@ setup(
     description='The DB Interfaces library provides a standardized way to interact with Firestore and BigQuery databases in Python projects. The library is designed to be easy to use, flexible, and compatible with modern cloud-based applications.',
     packages=find_packages(),
     install_requires=[
-        'google-cloud-firestore>=2.11.1',
-        'pydantic>=1.10.9',
-        'python-dotenv>=1.0.0'
+        'google-cloud-firestore',
+        'pydantic',
+        'python-dotenv'
     ],
 )

@@ -41,6 +41,7 @@ class FirestoreInterface:
         )
         # Include the models so they can be accessed easier outside the class
         self.SelectModel = SelectModel
+        self.OrderByModel = OrderByModel
         self.UpdateModel = UpdateModel
         self.InsertModel = InsertModel
         self.DeleteModel = DeleteModel
